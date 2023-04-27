@@ -2,9 +2,17 @@
 <html>
 <head>
   <title>Admin</title>
+  <link rel="stylesheet" href="style.css">
+<style>
+  a{
+    text-align: center;
+  }
+</style>
 </head>
 <body>
+  <div class="container">
   <h1>Admin Dashboard</h1>
+  <h2>List of Tools Added</h2>
   <table id="usersTable">
     <thead>
       <tr>
@@ -17,6 +25,7 @@
     </tbody>
   </table>
   <br><br><br>
+  <h1>List of Users</h1>
   <table id="toolsTableBody">
     <thead>
       <tr>
@@ -29,15 +38,23 @@
   </table>
   <br><br><br>
   <h1>Add tool</h1>
-  <form method="POST" action="https://calm-plum-agouti-tutu.cyclic.app/create">
+
+  <form id="survey-form" method="POST" action="https://calm-plum-agouti-tutu.cyclic.app/create">
     <label for="name">Tool Name:</label>
     <input type="text" id="toolName" name="name"><br><br>
     <label for="price">Tool Price:</label>
     <input type="text" id="toolPrice" name="price"><br><br>
     <input type="submit" value="Add Tool">
   </form>
-  <a href="https://abdul-samad5.github.io/quiets/order.html">order</a>
-  <button id="logoutButton">Logout</button>
+  <div class="form-group">
+  <a class="submit-button" href="https://abdul-samad5.github.io/quiets/order.html">order page</a>
+</div>
+  <div class="form-group">
+		<button id="logoutButton" class="submit-button">
+			Logout
+		</button>
+	  </div>
+  </div>
   <script>
    
 fetch('https://calm-plum-agouti-tutu.cyclic.app/tools')

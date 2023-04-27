@@ -5,9 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+      button{
+        margin-top: 200px;
+      }
+    </style>
 </head>
 <body>
-    user page
+<div class="container">
+   <h1>User Page</h1>
     <table id="usersTable">
         <thead>
           <tr>
@@ -19,6 +26,8 @@
         <tbody>
         </tbody>
       </table>
+      <button class="submit-button" id="logoutButton">Logout</button>
+    </div>
     <script>
           fetch('https://calm-plum-agouti-tutu.cyclic.app/tools')
       .then(response => response.json())
@@ -52,6 +61,10 @@
         });
       })
       .catch(error => console.log(error));
+      const logoutButton = document.querySelector('#logoutButton');
+    logoutButton.addEventListener('click', () => {
+     window.location.href = 'https://abdul-samad5.github.io/quiets/index.html';
+    });
     </script>
 </body>
 </html>

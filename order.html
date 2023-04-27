@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   
+    
+      <table id="orderTable">
+        <thead>
+          <tr>
+            <th>Tool Name</th>
+            <th>Price</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+      <script>
+       const previousOrders = JSON.parse(localStorage.getItem('orders')) || [];
+const tableBody = document.querySelector('#orderTable tbody');
+previousOrders.forEach(order => {
+  const row = document.createElement('tr');
+  const nameCell = document.createElement('td');
+  const priceCell = document.createElement('td');
+  nameCell.textContent = order.toolName;
+  priceCell.textContent = order.toolPrice;
+  row.appendChild(nameCell);
+  row.appendChild(priceCell);
+  tableBody.appendChild(row);
+});
+
+      </script>
+</body>
+</html>

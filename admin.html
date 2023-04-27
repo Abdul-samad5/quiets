@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin</title>
+</head>
+<body>
+  <h1>Admin Dashboard</h1>
+  <table id="usersTable">
+    <thead>
+      <tr>
+        <th>Tool Name</th>
+        <th>Price</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+  <br><br><br>
+  <table id="toolsTableBody">
+    <thead>
+      <tr>
+        <th>username</th>
+        <th>role</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+  <br><br><br>
+  <h1>Add tool</h1>
+  <form method="POST" action="https://modern-cow-leg-warmers.cyclic.app/create">
+    <label for="name">Tool Name:</label>
+    <input type="text" id="toolName" name="name"><br><br>
+    <label for="price">Tool Price:</label>
+    <input type="text" id="toolPrice" name="price"><br><br>
+    <input type="submit" value="Add Tool">
+  </form>
+  <a href="./order.html">order</a>
+  <button id="logoutButton">Logout</button>
+  <script>
+   
+fetch('https://modern-cow-leg-warmers.cyclic.app/tools')
+      .then(response => response.json())
+      .then(tools => {
+        const tableBody = document.querySelector('#usersTable tbody');
+        tools.forEach(user => {
+          const row = document.createElement('tr');
+          const usernameCell = document.createElement('td');
+          const roleCell = document.createElement('td');
+          const deleteCell = document.createElement('td');
+      const deleteButton = document.createElement('button');
+          usernameCell.textContent = user.name;
+          roleCell.textContent = user.price;
+          deleteButton.textContent = 'Delete';
+      deleteButton.addEventListener('click', () => {
+        fetch(`https://modern-cow-leg-warmers.cyclic.app/api/tool/deleteTool/${user._id}`, {
+          method: 'DELETE'
+        })
+        .then(response => response.json())
+        .then(result => {
+          console.log(`Tool deleted: ${user.name}`);
+          row.remove(); 
+        })
+        .catch(error => console.log(error));
+      });
+      deleteCell.appendChild(deleteButton);
+          row.appendChild(usernameCell);
+          row.appendChild(roleCell);
+          row.appendChild(deleteCell);
+          tableBody.appendChild(row);
+        });
+      })
+      .catch(error => console.log(error));
+      fetch('https://modern-cow-leg-warmers.cyclic.app/admin')
+      .then(response => response.json())
+      .then(users => {
+        // Update the table with the user data
+        const tableBody = document.querySelector('#toolsTableBody tbody');
+        users.forEach(user => {
+          const rot = document.createElement('tr');
+          const usernameCell = document.createElement('td');
+          //const passwordCell = document.createElement('td');
+          const roleCell = document.createElement('td');
+          usernameCell.textContent = user.username;
+          //passwordCell.textContent = user.password;
+          roleCell.textContent = user.role;
+          rot.appendChild(usernameCell);
+          //row.appendChild(passwordCell);
+          rot.appendChild(roleCell);
+          tableBody.appendChild(rot);
+        });
+      })
+      .catch(error => console.log(error));
+
+      const logoutButton = document.querySelector('#logoutButton');
+    logoutButton.addEventListener('click', () => {
+      window.location.href = 'http://127.0.0.1:5500/front/index.html';
+    });
+  </script>
+</body>
+</html>

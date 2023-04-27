@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    user page
+    <table id="usersTable">
+        <thead>
+          <tr>
+            <th>Tool Name</th>
+            <th>Price</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    <script>
+     // let orders = [];
+          fetch('https://modern-cow-leg-warmers.cyclic.app/tools')
+      .then(response => response.json())
+      .then(tools => {
+        const tableBody = document.querySelector('#usersTable tbody');
+        tools.forEach(user => {
+          const row = document.createElement('tr');
+          const usernameCell = document.createElement('td');
+          const roleCell = document.createElement('td');
+          const orderCell = document.createElement('td');
+          const orderButton = document.createElement('button');
+          usernameCell.textContent = user.name;
+          roleCell.textContent = user.price;
+          orderButton.textContent = 'Order';
+          orderButton.addEventListener('click', () => {
+  const data = {
+    toolName:user.name,
+    toolPrice: user.price
+  };
+  const previousOrders = JSON.parse(localStorage.getItem('orders')) || [];
+  previousOrders.push(data);
+  localStorage.setItem('orders', JSON.stringify(previousOrders));
+  alert(`Order successful: ${user.name}`);
+});
+        // localStorage.setItem('toolName', user.name);
+        // localStorage.setItem('toolPrice', user.price);
+        //     alert(`Order successful: ${user.name}`);
+        //   });
+          orderCell.appendChild(orderButton);
+          row.appendChild(usernameCell);
+          row.appendChild(roleCell);
+          row.appendChild(orderCell);
+          tableBody.appendChild(row);
+        });
+      })
+      .catch(error => console.log(error));
+    </script>
+</body>
+</html>

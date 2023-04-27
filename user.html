@@ -20,8 +20,7 @@
         </tbody>
       </table>
     <script>
-     // let orders = [];
-          fetch('https://modern-cow-leg-warmers.cyclic.app/tools')
+          fetch('http://localhost:5000/tools')
       .then(response => response.json())
       .then(tools => {
         const tableBody = document.querySelector('#usersTable tbody');
@@ -44,10 +43,7 @@
   localStorage.setItem('orders', JSON.stringify(previousOrders));
   alert(`Order successful: ${user.name}`);
 });
-        // localStorage.setItem('toolName', user.name);
-        // localStorage.setItem('toolPrice', user.price);
-        //     alert(`Order successful: ${user.name}`);
-        //   });
+     
           orderCell.appendChild(orderButton);
           row.appendChild(usernameCell);
           row.appendChild(roleCell);
